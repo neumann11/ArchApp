@@ -1,0 +1,45 @@
+<% include ../partials/header %>
+
+<a href="/projects" class="btn btn-outline-secondary">Back all to projects</a>
+
+<div class="row">
+	<h1 style="text-align: center;">Add a New Project</h1>
+	<div style="width: 30%; margin: 25px auto;">
+		<form action="/projects" method="POST">
+
+			<div class="form-group">
+				<label for="name">Name</label>
+				<input class="form-control" type="text" name="name" placeholder="project name">
+			</div>
+			<div class="form-group">
+				<label for="architects">Architects</label>
+				<input class="form-control" type="text" name="architects" placeholder="architects">
+			</div>
+			<div class="form-group">
+				<label for="location">Location</label>
+				<input class="form-control" type="text" name="location" placeholder="location">
+			</div>
+			<div class="form-group">
+				<label for="year">Year</label>
+				<input class="form-control" min="1800" step="1" type="number" name="year" placeholder="project year">
+			</div>
+			<div class="form-group">
+				<label for="image">Image</label>
+				<input class="form-control" type="text" name="image" placeholder="image">
+			</div>
+			<div class="form-group">
+				<label for="description">Description</label>
+				<input class="form-control" type="text" name="description" placeholder="project description">
+			</div>
+			<div class="form-group">
+				<label for="source">Source</label>
+				<input class="form-control" type="text" name="source" placeholder="source">
+			</div>
+			<div class="form-group">
+				<input class="btn btn-outline-dark" type="submit" value="Submit">
+			</div>
+		</form>
+	</div>
+</div>
+
+<% include ../partials/footer %>

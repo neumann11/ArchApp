@@ -1,7 +1,35 @@
 <% include ../partials/header %>
 
-<a href="/" class="btn btn-lg btn-success">Back to homepage</a>
+	<header class="jumbotron">
+		<div class="container">
+			<h1>Welcome to ArchApp!</h1>
+			<p>View newest architecture highlight from all over the world</p>
+			<p>
+				<a class="btn btn-outline-success btn-lg" href="/projects/new">Add New Project</a>
+			</p>
+			<p>
+				<a href="/" class="btn btn-outline-secondary">Back to homepage</a>
+			</p>
+		</div>
+	</header>
 
-<h1>INDEX PAGE. HERE YOU WILL SEE ALL OUR PROJECTS!</h1>
+	<div class="row text-center" style="display:flex; flex-wrap: wrap;">
+		<% projects.forEach(function(project) {%>
+			<div class="col-md-6">
+				<div class="thumbnail">
+					<img src="<%= project.image %>">
+					<div class="caption">
+						<h5><%= project.name %></h5> 
+						<p><%= project.year %></p>
+						<p><%= project.location %></p>
+						<p><%= project.architects %></p>
+					</div>
+					<p>
+						<a href="/projects/<%= project._id %>" class="btn btn-outline-primary">More Info</a>
+					</p>
+				</div>	
+			</div>
+		<%	}); %>
+	</div>
 
 <% include ../partials/footer %>
