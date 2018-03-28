@@ -7,6 +7,9 @@ var express			= require("express"),
 	LocalStrategy	= require("passport-local"),
 	methodOverride	= require("method-override");
 
+// REQUIRING ROUTES
+var indexRoutes		= require("./routes/index");
+
 // APP CONFIG
 // local development database:
 var url = process.env.DATABASEURL || "mongodb://localhost/arch_app"
@@ -17,6 +20,10 @@ app.use(express.static(__dirname + "/public"));
 app.use(methodOverride("_method"));
 app.use(flash());
 app.locals.moment = require("moment");
+
+// USE ROUTERS
+
+app.use("/", indexRoutes);
 
 app.listen(3000, function(){
 	console.log("Server started");
