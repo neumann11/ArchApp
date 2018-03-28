@@ -8,7 +8,8 @@ var express			= require("express"),
 	methodOverride	= require("method-override");
 
 // REQUIRING ROUTES
-var indexRoutes		= require("./routes/index");
+var indexRoutes		= require("./routes/index"),
+	projectRoutes	= require("./routes/projects");
 
 // APP CONFIG
 // local development database:
@@ -22,8 +23,8 @@ app.use(flash());
 app.locals.moment = require("moment");
 
 // USE ROUTERS
-
 app.use("/", indexRoutes);
+app.use("/projects", projectRoutes);
 
 app.listen(3000, function(){
 	console.log("Server started");
