@@ -52,4 +52,22 @@ router.get("/:id", function(req, res){
 	});
 });
 
+// EDIT ROUTE
+router.get("/:id/edit", function(req, res){
+	Project.findById(req.params.id, function(err, foundProject){
+		res.render("projects/edit", {project: foundProject});
+	});
+});
+
+// UPDATE ROUTE
+router.put("/:id", function(req, res) {
+	Project.findByIdAndUpdate(req.params.id, req.body.project, function(err, updatedProject){
+		if(err){
+			res.redirect("/projects");
+		} else {
+			res.redirect("/projects/" + req.params.id);
+		}
+	});
+});
+
 module.exports = router;
