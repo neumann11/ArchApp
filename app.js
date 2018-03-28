@@ -5,7 +5,10 @@ var express			= require("express"),
 	flash			= require("connect-flash"),
 	passport		= require("passport"),
 	LocalStrategy	= require("passport-local"),
-	methodOverride	= require("method-override");
+	methodOverride	= require("method-override"),
+	Project 		= require("./models/project"),
+	Comment			= require("./models/comment"),
+	User			= require("./models/user");
 
 // REQUIRING ROUTES
 var indexRoutes		= require("./routes/index"),
