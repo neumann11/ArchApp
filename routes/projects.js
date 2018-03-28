@@ -40,4 +40,16 @@ router.post("/", function(req, res) {
 	});
 });
 
+// SHOW ROUTE
+router.get("/:id", function(req, res){
+	// Find the campground with provided id
+	Project.findById(req.params.id, function(err, foundProject){
+		if(err) {
+			console.log(err);
+		} else {
+			res.render("projects/show", {project: foundProject});
+		}
+	});
+});
+
 module.exports = router;

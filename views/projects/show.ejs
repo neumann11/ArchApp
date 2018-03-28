@@ -1,0 +1,14 @@
+<% include ../partials/header %>
+
+<div class="thumbnail">
+	<img class="img-responsive" src="<%= project.image %>">
+	<div class="caption">
+		<h5><%= project.name %></h5> 
+		<p><%= project.year %></p>
+		<p><%= project.location %></p>
+		<p><%= project.architects %></p>
+		<p><%= project.description %></p>
+	</div>
+</div>
+
+<% include ../partials/footer %>
