@@ -1,20 +1,24 @@
 <% include ../partials/header %>
 
-<a href="/projects" class="btn btn-outline-secondary">Back all to projects</a>
-
-<div class="thumbnail">
-	<img class="img-responsive" src="<%= project.image %>">
-	<div class="caption">
-		<h5><%= project.name %></h5> 
-		<p><%= project.year %></p>
-		<p><%= project.location %></p>
-		<p><%= project.architects %></p>
-		<p><%= project.description %></p>
+<div class="row">
+	<div class="thumbnail">
+		<img class="img-responsive" src="<%= project.image %>">
+		<div class="caption">
+			<h5><%= project.name %></h5> 
+			<p><%= project.year %></p>
+			<p><%= project.location %></p>
+			<p><%= project.architects %></p>
+			<p><%= project.description %></p>
+		</div>
+		<a href="/projects/<%= project._id %>/edit" class="btn btn-sm btn-outline-warning">Edit</a>
+		<form class="delete-form" action="/projects/<%= project._id %>?_method=DELETE" method="POST">
+			<button class="btn btn-sm btn-outline-danger">Delete</button>
+		</form>
+		<a href="/projects" class="btn btn-sm btn-outline-secondary pull-right">Back to all projects</a>
 	</div>
-	<a href="/projects/<%= project._id %>/edit" class="btn btn-sm btn-outline-warning">Edit</a>
-	<form class="delete-form" action="/projects/<%= project._id %>?_method=DELETE" method="POST">
-		<button class="btn btn-sm btn-outline-danger">Delete</button>
-	</form>
+	<div class="well">
+
+	</div>
 </div>
 
 <% include ../partials/footer %>

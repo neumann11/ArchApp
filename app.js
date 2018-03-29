@@ -25,6 +25,25 @@ app.use(methodOverride("_method"));
 app.use(flash());
 app.locals.moment = require("moment");
 
+// PASSPORT CONFIGURATION
+app.use(require("express-session")({
+	secret: "This will be a great website",
+	resave: false,
+	saveUninitialized: false
+}));
+app.use(passport.initialize());
+app.use(passport.session());
+passport.use(new LocalStrategy(User.authenticate()));
+passport.serializeUser(User.serializeUser());
+passport.deserializeUser(User.deserializeUser());
+
+app.use(function(req, res, next){
+	res.locals.currentUser = req.user; //check current user on every route(login, logout, signup buttons; user display): 
+	res.locals.error = req.flash("error"); // flash messages dispaly error
+	res.locals.success = req.flash("success"); // flash messages dispaly success
+	next();
+});
+
 // USE ROUTERS
 app.use("/", indexRoutes);
 app.use("/projects", projectRoutes);

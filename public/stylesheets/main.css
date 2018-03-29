@@ -6,21 +6,46 @@
 	padding: 0;
 }
 
+/*buttons*/
 .delete-form {
 	display: inline;
 }
 
+/*.btn-xs {
+  line-height: ensure proper height of button next to extra small input 
+  @include button-size($padding-y, $padding-x, $font-size, $line-height, $border-radius);
+}*/
+
+/*Logo button styling*/
 .fa-home:before {
     font-size: 40px;
 }
 
-/*align menu with the logo*/
+/*align nav menu with the logo*/
 .navbar-nav {
-	margin-top: 12px;
+	margin-top: 14px;
 }
 
 /*create distance between nav and the page*/
-
 .navbar {
 	margin-bottom: 20px;
+}
+
+/*distance at the bottom of every page*/
+.row {
+	margin-bottom: 60px;
+}
+
+/*no decoration of text with links */
+a h5 {
+	color: black;
+	text-decoration: none;
+}
+
+.caption a:hover {
+    text-decoration: none;
+}
+
+.thumbnail {
+	text-align: left;
 }

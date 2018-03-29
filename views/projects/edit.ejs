@@ -1,7 +1,5 @@
 <% include ../partials/header %>
 
-<a href="/projects" class="btn btn-outline-secondary">Back all to projects</a>
-
 <div class="row">
 	<h1 style="text-align: center;">Edit <%= project.name %></h1>
 	<div style="width: 30%; margin: 25px auto;">
@@ -36,10 +34,11 @@
 				<input class="form-control" type="text" name="project[source]" value="<%= project.source %>">
 			</div>
 			<div class="form-group">
-				<input class="btn btn-outline-dark" type="submit" value="Submit">
+				<input class="btn btn-sm btn-outline-dark" type="submit" value="Submit">
 			</div>
 		</form>
 	</div>
 </div>
+<a href="/projects" class="btn btn-sm btn-outline-secondary">Back all to projects</a>
 
 <% include ../partials/footer %>
