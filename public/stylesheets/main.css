@@ -9,3 +9,18 @@
 .delete-form {
 	display: inline;
 }
+
+.fa-home:before {
+    font-size: 40px;
+}
+
+/*align menu with the logo*/
+.navbar-nav {
+	margin-top: 12px;
+}
+
+/*create distance between nav and the page*/
+
+.navbar {
+	margin-bottom: 20px;
+}
