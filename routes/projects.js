@@ -43,7 +43,7 @@ router.post("/", function(req, res) {
 // SHOW ROUTE
 router.get("/:id", function(req, res){
 	// Find the campground with provided id
-	Project.findById(req.params.id, function(err, foundProject){
+	Project.findById(req.params.id).populate("comments").exec(function(err, foundProject){
 		if(err) {
 			console.log(err);
 		} else {

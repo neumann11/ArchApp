@@ -13,6 +13,7 @@ var express			= require("express"),
 // REQUIRING ROUTES
 var indexRoutes		= require("./routes/index"),
 	projectRoutes	= require("./routes/projects");
+	commentRoutes	= require("./routes/comments");
 
 // APP CONFIG
 // local development database:
@@ -47,22 +48,7 @@ app.use(function(req, res, next){
 // USE ROUTERS
 app.use("/", indexRoutes);
 app.use("/projects", projectRoutes);
-
-// Project.create({
-// 	name: "Black House",
-// 	architects: "C3",
-// 	location: "Yilan, Taiwan",
-// 	year: "2017",
-// 	image: "http://www.decorfrontline.com/wp-content/uploads/2018/03/black-house-c3.jpg",
-// 	description: "The lush greenery, decorated with mountain mists and flying egrets, not only is refreshing and energizing but has made Tou-Cheng (of Yilan County) the best attraction for a two-day trip. This little town has a magical power that can remind people the true meaning of life. Now, amid the greenery a new landscape has unpretentiously arisen. Appearing as a chocolate bar standing amid the green paddy fields, the Black House, though without ostentatious decorations and an eye-catching commercial sign, is a house full of surprises and wonders.",
-// 	source: "www.archdaily.com"
-// }, function(err, project){
-// 	if(err){
-// 		console.log(err);
-// 	} else {
-// 		console.log(project);
-// 	}
-// })
+app.use("/projects/:id/comments", commentRoutes);
 
 app.listen(3000, function(){
 	console.log("Server started");
