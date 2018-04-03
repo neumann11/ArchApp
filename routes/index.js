@@ -41,7 +41,10 @@ router.post("/login", function(req, res, next) {
     if (err) { return next(err); }
     if (!user) { return res.redirect("/login"); }
     req.logIn(user, function(err) {
-      if (err) { return next(err); }
+      if (err) { 
+      	req.flash("error", err.message);
+      	return next(err); 
+      }
       var redirectTo = req.session.redirectTo ? req.session.redirectTo : "/projects"; // redirects to the target page prior to login.
       delete req.session.redirectTo;
       req.flash("success", "Welcome back, " + user.username + "!");

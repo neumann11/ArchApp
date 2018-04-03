@@ -14,13 +14,15 @@
 		<% projects.forEach(function(project) {%>
 			<div class="col-md-6">
 				<div class="thumbnail">
-					<a href="/projects/<%= project._id %>"><img src="<%= project.image %>"></a>
-						<a href="/projects/<%= project._id %>"><h5><%= project.name %></h5></a> 
+					<a href="/projects/<%= project._id %>"><img style="height: 300px" src="<%= project.image %>"></a>
+					<a href="/projects/<%= project._id %>"><h5><%= project.name %></h5></a> 
+					<div class="caption">
 						<p>
 							<%= project.year %><br>
 							<%= project.location %><br>
 							<%= project.architects %><br>
 						</p>
+					</div>
 				</div>	
 			</div>
 		<%	}); %>
