@@ -20,10 +20,11 @@ router.post("/register", function(req, res){
 	// create new user
 	User.register(newUser, req.body.password, function(err, user){
 		if(err){
-			return res.render("register");
+			return res.render("register", {"error": err.message});
 		}
 		// login new user
 		passport.authenticate("local")(req, res, function(){
+			req.flash("success", "Welcome to ArchApp " + user.username + "!");
 			res.redirect("/projects");
 		});
 	});
@@ -35,16 +36,35 @@ router.get("/login", function(req, res){
 });
 
 // Handle login logic
-router.post("/login", passport.authenticate("local", //passport.authenticate is middleware
-	{
-		successRedirect: "/projects",
-		failureRedirect: "/login",
-	}), function(req, res){ //this callback doesn't do anything and could be deleted.
+router.post("/login", function(req, res, next) {
+  passport.authenticate("local", function(err, user, info) {
+    if (err) { return next(err); }
+    if (!user) { return res.redirect("/login"); }
+    req.logIn(user, function(err) {
+      if (err) { return next(err); }
+      var redirectTo = req.session.redirectTo ? req.session.redirectTo : "/projects"; // redirects to the target page prior to login.
+      delete req.session.redirectTo;
+      req.flash("success", "Welcome back, " + user.username + "!");
+      res.redirect(redirectTo);
+    });
+  })(req, res, next);
 });
+
+// router.post("/login", passport.authenticate("local", //passport.authenticate is middleware
+// 	{
+
+// 		successRedirect: "/projects",
+// 		failureRedirect: "/login",
+// 		failureFlash: true,
+// 		successFlash: true
+// 	}), function(req, res){ //this callback doesn't do anything and could be deleted.
+// });
 
 // Logout route
 router.get("/logout", function(req, res){
+	var username = req.user.username; // req.user.username doesn't exist anymore after you invoke req.logout()
 	req.logout();
+	req.flash("success", "Logged you out, " + username + "!");
 	res.redirect("/projects");
 });
 

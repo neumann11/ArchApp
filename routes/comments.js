@@ -49,7 +49,8 @@ router.post("/", middleware.isLoggedIn, function(req, res){
 // Comments Edit
 router.get("/:comment_id/edit", middleware.checkCommentOwnership, function(req, res){
 	Project.findById(req.params.id, function(err, foundProject){
-		if(err){
+		if(err || !foundProject){
+			req.flash("error", "No project found!");
 			return res.redirect("back");
 		}
 		Comment.findById(req.params.comment_id, function(err, foundComment){
@@ -77,8 +78,10 @@ router.put("/:comment_id", middleware.checkCommentOwnership, function(req, res){
 router.delete("/:comment_id", middleware.checkCommentOwnership, function(req, res){
 	Comment.findByIdAndRemove(req.params.comment_id, function(err){
 		if(err){
+			req.flash("error", "Something went wrong");
 			res.redirect("back");
 		} else {
+			req.flash("success", "Comment deleted");
 			res.redirect("/projects/" + req.params.id);
 		}
 	});
