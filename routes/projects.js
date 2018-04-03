@@ -1,6 +1,7 @@
 var express = require("express");
 var router	= express.Router();
 var Project = require("../models/project");
+var middleware = require("../middleware");
 
 // INDEX - show all architecture projects
 router.get("/", function(req, res){
@@ -15,12 +16,12 @@ router.get("/", function(req, res){
 });
 
 // NEW ROUTE - show new form
-router.get("/new", function(req, res) {
+router.get("/new", middleware.isLoggedIn, function(req, res) {
 	res.render("projects/new");
 })
 
 // CREATE ROUTE
-router.post("/", function(req, res) {
+router.post("/", middleware.isLoggedIn, function(req, res) {
 	var name = req.body.name;
 	var architects = req.body.architects;
 	var location = req.body.location;
@@ -57,14 +58,14 @@ router.get("/:id", function(req, res){
 });
 
 // EDIT ROUTE
-router.get("/:id/edit", function(req, res){
+router.get("/:id/edit", middleware.checkProjectOwnership, function(req, res){
 	Project.findById(req.params.id, function(err, foundProject){
 		res.render("projects/edit", {project: foundProject});
 	});
 });
 
 // UPDATE ROUTE
-router.put("/:id", function(req, res) {
+router.put("/:id", middleware.checkProjectOwnership, function(req, res) {
 	Project.findByIdAndUpdate(req.params.id, req.body.project, function(err, updatedProject){
 		if(err){
 			res.redirect("/projects");
@@ -75,7 +76,7 @@ router.put("/:id", function(req, res) {
 });
 
 // DESTROY ROUTE
-router.delete("/:id", function(req, res){
+router.delete("/:id", middleware.checkProjectOwnership, function(req, res){
 	Project.findByIdAndRemove(req.params.id, function(err){
 		if(err){
 			res,redirect("/projects");
