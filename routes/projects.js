@@ -10,7 +10,7 @@ router.get("/", function(req, res){
 		if(err) {
 			console.log(err);
 		} else {
-			res.render("projects/index", {projects: allProjects});
+			res.render("projects/index", {projects: allProjects, currentUser: req.user, page: "projects"});
 		}
 	});
 });
