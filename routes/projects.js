@@ -28,7 +28,11 @@ router.post("/", function(req, res) {
 	var image = req.body.image;
 	var description = req.body.description;
 	var source = req.body.source;
-	var newProject = {name: name, architects: architects, location: location, year: year, image: image, description: description, source: source};
+	var author = {
+		id: req.user._id,
+		username: req.user.username
+	};
+	var newProject = {name: name, architects: architects, location: location, year: year, image: image, description: description, source: source, author: author};
 	// create new project and save to DB
 	Project.create(newProject, function(err, newlyCreated) {
 		if(err) {

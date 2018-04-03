@@ -26,12 +26,12 @@
 				<input class="form-control" type="text" name="project[image]" value="<%= project.image %>">
 			</div>
 			<div class="form-group">
-				<label for="description">Description:</label>
-				<input class="form-control" type="text" name="project[description]" value="<%= project.description %>">
-			</div>
-			<div class="form-group">
 				<label for="source">Source:</label>
 				<input class="form-control" type="text" name="project[source]" value="<%= project.source %>">
+			</div>
+			<div class="form-group">
+				<label for="description">Description:</label>
+				<textarea class="form-control" type="text" name="project[description]" rows="4" cols="50"><%= project.description %></textarea>
 			</div>
 			<div class="form-group">
 				<input class="btn btn-sm btn-outline-dark" type="submit" value="Submit">
