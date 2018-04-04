@@ -1,3 +1,5 @@
+require('dotenv').config(); //google maps env var
+
 var express			= require("express"),
 	app				= express(),
 	bodyParser		= require("body-parser"),

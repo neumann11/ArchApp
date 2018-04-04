@@ -1,26 +1,26 @@
 <% include ../partials/header %>
 
 <div class="row">
-	<div class="coll-md-12">
+	<div class="col-md-9" style="width: 90%; margin: 20px auto;">
 		<div class="thumbnail">
-			<img class="img-responsive" src="<%= project.image %>">
-			<div class="caption">
-				<h5><%= project.name %></h5> 
-				<p>Project Year: <strong><%= project.year %></strong><br>
-				Project Location: <strong><%= project.location %></strong><br>
-				Architects: <strong><%= project.architects %></strong></p>
-				<p><%- project.description %></p>
-				<p>Source: <em><%= project.source %></em><br>
-				Created by: <em><%= project.author.username %>, <%= moment(project.createdAt).fromNow() %></em></p>
-			</div>
-			<% if(currentUser && project.author.id.equals(currentUser._id)){ %>
-			<a href="/projects/<%= project._id %>/edit" class="btn btn-sm btn-outline-warning">Edit</a>
-			<form class="delete-form" action="/projects/<%= project._id %>?_method=DELETE" method="POST">
-				<button class="btn btn-sm btn-outline-danger">Delete</button>
-			</form>
-			<% }; %>
-			<a class="btn btn-sm btn-outline-info" href="/projects/<%= project._id %>/comments/new">Comment</a>
-			<a href="/projects" class="btn btn-sm btn-outline-secondary pull-right">Back to all projects</a>
+			<img class="img-responsive" style="margin-bottom: 20px" src="<%= project.image %>">
+				<div class="caption">
+					<h5><%= project.name %></h5> 
+					<p>Project Year: <strong><%= project.year %></strong><br>
+					Project Location: <strong><%= project.location %></strong><br>
+					Architects: <strong><%= project.architects %></strong></p>
+					<p><%- project.description %></p>
+					<p>Source: <em><%= project.source %></em><br>
+					Created by: <em><%= project.author.username %>, <%= moment(project.createdAt).fromNow() %></em></p>
+				</div>
+				<% if(currentUser && project.author.id.equals(currentUser._id)){ %>
+				<a href="/projects/<%= project._id %>/edit" class="btn btn-sm btn-outline-warning">Edit</a>
+				<form class="delete-form" action="/projects/<%= project._id %>?_method=DELETE" method="POST">
+					<button class="btn btn-sm btn-outline-danger">Delete</button>
+				</form>
+				<% }; %>
+				<a class="btn btn-sm btn-outline-info" href="/projects/<%= project._id %>/comments/new">Comment</a>
+				<a href="/projects" class="btn btn-sm btn-outline-secondary pull-right">Back to all projects</a>
 		</div>
 		<div class="well">
 			<hr>
@@ -37,6 +37,39 @@
 				<% }); %>
 		</div>
 	</div>
+	<div class="col-md-3">
+		<p class="lead">Project on map:</p>
+		<div id="map"></div>
+	</div>
 </div>
+
+<script>
+  function initMap() {
+    var lat = <%= project.lat %>;
+    var lng = <%= project.lng %>;
+    var center = {lat: lat, lng: lng };
+    var map = new google.maps.Map(document.getElementById('map'), {
+        zoom: 8,
+        center: center,
+        scrollwheel: false
+    });
+    var contentString = `
+      <strong><%= project.name %><br />
+      <%= project.location %></strong>
+      <p><%= project.description %></p>
+    `
+    var infowindow = new google.maps.InfoWindow({
+      content: contentString
+    });
+    var marker = new google.maps.Marker({
+        position: center,
+        map: map
+    });
+    marker.addListener('click', function() {
+      infowindow.open(map, marker);
+    });
+  }
+</script>
+<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCUcs-ylxrqGt_9iUi3CLj2cRYPTeR7eQk&callback=initMap"></script>
 
 <% include ../partials/footer %>

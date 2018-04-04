@@ -59,3 +59,9 @@ label {
 ::-webkit-input-placeholder { /* WebKit, Blink, Edge */
 	color: #d1d1d1 !important; 
 }  
+
+/* Google Maps */
+#map {
+    height: 400px;
+    width: 100%;
+}
